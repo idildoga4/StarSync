@@ -19,7 +19,10 @@ class _AuthScreenState extends State<AuthScreen>
   var _enteredPassword= '';
   void _submit() {
     final isValid=_formKey.currentState!.validate();
-
+    if(!isValid)
+    {
+      return;
+    }
 
     if(isValid)
     {
