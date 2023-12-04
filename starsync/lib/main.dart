@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:starsync/screens/auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:starsync/screens/chat.dart';
+import 'package:starsync/screens/splash.dart';
 
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options:DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const App());
 }
 
@@ -18,7 +26,21 @@ class App extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
             seedColor: Color.fromARGB(254, 230, 185, 221)),
       ),
-      home: const AuthScreen(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder:(ctx,snapshot)
+        {
+          if(snapshot.connectionState==ConnectionState.waiting)
+          {
+            return const SplashScreen();
+          }
+          if(snapshot.hasData)
+          {
+            return const ChatScreen(); //that will be change to flow screen
+          }
+          return const AuthScreen();
+        }
+      )
     );
   }
 }
