@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:starsync/widgets/chat_messages.dart';
+import 'package:starsync/widgets/new_message.dart';
 
 class ChatScreen extends StatelessWidget{
   const ChatScreen({super.key});
@@ -20,6 +22,15 @@ Widget build(BuildContext context)
         ,)
       ]
     ),
+    body:Container(
+      child: Column(children: [
+      Expanded(
+        
+        child: ChatMessages(),),
+      NewMessage(),
+    ],),
+      decoration: BoxDecoration(image:DecorationImage(image:AssetImage("assests/images/mapp.jpg"),fit:BoxFit.cover),),)
+    
   );
 }
 }

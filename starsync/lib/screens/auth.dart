@@ -148,12 +148,12 @@ class _AuthScreenState extends State<AuthScreen>
                               return 'Please enter at least 4 characters.';
                             }
                             return null;
-                          }
+                          },
                           onSaved:(value)
                           {
                             _enteredUsername=value!;
                           }
-                        )
+                        ),
                         TextFormField(
                           decoration: const InputDecoration(
                             labelText:'Password'
